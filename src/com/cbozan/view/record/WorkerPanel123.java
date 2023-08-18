@@ -27,7 +27,7 @@ import com.cbozan.view.component.TextArea;
 import com.cbozan.view.helper.Control;
 import com.cbozan.view.helper.Observer;
 
-public class WorkerPanel extends JPanel implements Observer, Serializable, ActionListener{
+public class WorkerPanel123 extends JPanel implements Observer, Serializable, ActionListener{
 
 	private static final long serialVersionUID = 5821030218386153605L;
 	private final List<Observer> observers;
