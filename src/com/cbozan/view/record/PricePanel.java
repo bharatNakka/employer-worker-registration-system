@@ -28,7 +28,7 @@ public class PricePanel extends JPanel implements Observer, Serializable, Action
 	
 	private static final long serialVersionUID = 1L;
 
-	private final List<Observer> observers;
+	private final List<Observer> observerss;
 	
 	/**
 	 * y position of label

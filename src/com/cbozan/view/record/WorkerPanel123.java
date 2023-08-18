@@ -27,7 +27,7 @@ import com.cbozan.view.component.TextArea;
 import com.cbozan.view.helper.Control;
 import com.cbozan.view.helper.Observer;
 
-public class WorkerPanel extends JPanel implements Observer, Serializable, ActionListener{
+public class WorkerPanel123 extends JPanel implements Observer, Serializable, ActionListener{
 
 	private static final long serialVersionUID = 5821030218386153605L;
 	private final List<Observer> observers;
@@ -88,6 +88,104 @@ public class WorkerPanel extends JPanel implements Observer, Serializable, Actio
 	private RecordTextField fnameTextField, lnameTextField, phoneNumberTextField, ibanTextField;
 	private TextArea descriptionTextArea;
 	private JButton saveButton;
+	
+	public WorkerPanel123() {
+		
+		super();	
+		setLayout(null);
+		
+		observers = new ArrayList<>();
+		subscribe(this);
+		
+		imageLabel = new JLabel(new ImageIcon("src\\icon\\new_worker.png"));
+		imageLabel.setBounds(LX + 157, 50, 128, 128);
+		add(imageLabel);
+		
+		
+		fnameLabel = new JLabel("Name");
+		fnameLabel.setBounds(LX, LY, LW, LH);
+		add(fnameLabel);
+		
+		fnameTextField = new RecordTextField(RecordTextField.REQUIRED_TEXT);
+		fnameTextField.setBounds(LX + fnameLabel.getWidth() + LHS, fnameLabel.getY(), TW, TH);
+		fnameTextField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!fnameTextField.getText().replaceAll("\\s+", "").equals(""))
+					lnameTextField.requestFocus();
+			}
+		});
+		add(fnameTextField);
+		
+		
+		lnameLabel = new JLabel("Surname");
+		lnameLabel.setBounds(LX, fnameLabel.getY() + LVS, LW, LH);
+		add(lnameLabel);
+		
+		lnameTextField = new RecordTextField(RecordTextField.REQUIRED_TEXT);
+		lnameTextField.setBounds(LX + lnameLabel.getWidth() + LHS, lnameLabel.getY(), TW, TH);
+		lnameTextField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!lnameTextField.getText().replaceAll("\\s+", "").equals("")) {
+					phoneNumberTextField.requestFocus();
+				}
+			}
+		});
+		add(lnameTextField);
+		
+		phoneNumberLabel = new JLabel("Phone Nu.");
+		phoneNumberLabel.setBounds(LX, lnameLabel.getY() + LVS, LW, LH);
+		add(phoneNumberLabel);
+		
+		phoneNumberTextField = new RecordTextField(RecordTextField.PHONE_NUMBER_TEXT + RecordTextField.NON_REQUIRED_TEXT);
+		phoneNumberTextField.setBounds(LX + phoneNumberLabel.getWidth() + LHS, phoneNumberLabel.getY(),TW, TH);
+		phoneNumberTextField.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(Control.phoneNumberControl(phoneNumberTextField.getText())) {
+					ibanTextField.requestFocus();
+				}
+			}
+		});
+		add(phoneNumberTextField);
+		
+		ibanLabel = new JLabel("Iban");
+		ibanLabel.setBounds(LX, phoneNumberLabel.getY() + LVS, LW, LH);
+		add(ibanLabel);
+		
+		ibanTextField = new RecordTextField(RecordTextField.IBAN_NUMBER_TEXT + RecordTextField.NON_REQUIRED_TEXT);
+		ibanTextField.setBounds(LX + ibanLabel.getWidth() + LHS, ibanLabel.getY(), TW, TH);
+		ibanTextField.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(Control.ibanControl(ibanTextField.getText())) {
+					((JTextArea)((JViewport)descriptionTextArea.getComponent(0)).getComponent(0)).requestFocus();
+				}
+				
+			}
+		});
+		add(ibanTextField);
+		
+		descriptionLabel= new JLabel("Description");
+		descriptionLabel.setBounds(ibanLabel.getX(), ibanLabel.getY() + LVS, LW, LH);
+		add(descriptionLabel);
+		
+		descriptionTextArea = new TextArea();
+		descriptionTextArea.setBounds(descriptionLabel.getX() + LW + LHS, descriptionLabel.getY(), TW, TH * 3);
+		add(descriptionTextArea);
+		
+		saveButton = new JButton("SAVE");
+		saveButton.setBounds(descriptionTextArea.getX() + ((TW - BW) / 2), descriptionTextArea.getY() + descriptionTextArea.getHeight() + 20, BW, BH);
+		//save_button.setContentAreaFilled(false);
+		saveButton.setFocusPainted(false);
+		saveButton.addActionListener(this);
+		add(saveButton);
+		
+		
+		
+	}
 	
 	public WorkerPanel() {
 		
